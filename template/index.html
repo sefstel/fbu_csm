@@ -1,8 +1,10 @@
 {{define "index"}}
+{{template "header"}}
+{{template "finder"}}
+{{if .}}
+<h1>{{.}}</h1>
+{{end}}
+{{template "footer"}}
 
-     <form role="form" method="POST" action="/FindPr">
-
-<input name="ftext" id="find" size="50" type="search" placeholder="Ведите номер карточки" autofocus>
-<input type="submit" value="Найти">
-</form>
+    
 {{end}}

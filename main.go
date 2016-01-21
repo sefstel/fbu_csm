@@ -15,21 +15,26 @@ var Tbpribors map[string]*pribors //Приборы сгруппированы п
 var T *template.Template
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
-	T.ExecuteTemplate(w, "finder", nil)
+	T.ExecuteTemplate(w, "index", nil)
 }
 
 func findHandler(w http.ResponseWriter, r *http.Request) {
 	ftext := r.FormValue("ftext")  //Получили текст введенный пользователем
 	result, ok := Tbpribors[ftext] //Ищем список приборов по ключевому слову
 	if ok {
-		T.ExecuteTemplate(w, "finder", *result)
+		T.ExecuteTemplate(w, "result", *result)
 	} else {
 		T.ExecuteTemplate(w, "index", "Ничего не найдено")
 	}
 }
 func main() {
 	err := errors.New("sd")
-	T, err = template.ParseFiles("template/index.html", "template/finder.html", "template/result.html")
+	T, err = template.ParseFiles("template/index.html",
+		"template/finder.html",
+		"template/result.html",
+		"template/header.html",
+		"template/footer.html",
+	)
 	if err != nil {
 		log.Panic(err.Error())
 	}
